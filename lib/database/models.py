@@ -1,4 +1,4 @@
-from app import db
+from models import db
 from sqlalchemy import Enum
 
 class User(db.Model):
