@@ -51,10 +51,11 @@ def catalog_gender(gender):
 
         products = tshirts + sweatwears + outwears + socks + shoes + trousers
     # показывает только женское
+        return render_template('catalog.html', products=products)
     
     elif gender == 'womans':
         pass
-    return render_template('catalog.html', products=products)
+    
     
  
 if __name__ == "__main__":
