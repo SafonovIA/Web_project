@@ -1,12 +1,11 @@
 from flask import Flask, render_template
-from lib.database.models import *
+from lib.database.models import Tshirt, Outwear, Sweatwear, Socks, Shoes, Trousers
 from config import app
 import random
 
 
 @app.route("/", methods=['GET'])
-def home_page():
-    page_title = "Интернет магазин" 
+def home_page(): 
     tshirts = Tshirt.query.add_columns(Tshirt.picture, Tshirt.type_item, Tshirt.price).all()
     sweatwears = Sweatwear.query.add_columns(Sweatwear.picture, Sweatwear.type_item, Sweatwear.price).all()
     outwears = Outwear.query.add_columns(Outwear.picture, Outwear.type_item, Outwear.price).all()
@@ -20,7 +19,7 @@ def home_page():
     random.shuffle(products)
     products = products[:4]
     
-    return render_template("home_page.html", page_title=page_title, products=products)
+    return render_template("home_page.html", products=products)
 
 @app.route("/login")
 def login():
@@ -37,7 +36,6 @@ def basket():
 def catalog_gender(gender):
     # показывает только мужское
     if gender == 'mans':
-        page_title = 'Мужское'
         tshirts = Tshirt.query.add_columns(Tshirt.picture, Tshirt.type_item, Tshirt.price)\
                           .filter(Tshirt.gender == 'мужской').all()
         sweatwears = Sweatwear.query.add_columns(Sweatwear.picture, Sweatwear.type_item, Sweatwear.price)\
@@ -51,14 +49,12 @@ def catalog_gender(gender):
         trousers = Trousers.query.add_columns(Trousers.picture, Trousers.type_item, Trousers.price)\
                              .filter(Trousers.gender == 'мужской').all()
 
-    
         products = tshirts + sweatwears + outwears + socks + shoes + trousers
     # показывает только женское
+    
     elif gender == 'womans':
-        page_title = 'Женское'
-    else:
-        page_title = 'Детское'
-    return render_template('catalog.html', page_title=page_title, products=products)
+        pass
+    return render_template('catalog.html', products=products)
     
  
 if __name__ == "__main__":
