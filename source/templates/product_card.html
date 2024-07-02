@@ -1,9 +1,11 @@
+<link rel="stylesheet" href="/static/styles.css">
 <div class="col-3">
-    <div class="card" style="width: 18rem;">
-        <img src="{{ product.picture }}" class="card-img-top" alt="Изображение товара">
+    <div class="card">
+        <img src="{{ product.picture }}" class="card-img-top product-image" alt="Изображение товара">
         <div class="card-body">
-            <h5 class="card-title">{{ product.brand }}</h5>
-            <p class="card-text">{{ product.price }}</p>
+            <h5 class="card-title">{{ product.type_item }}</h5>
+            <!-- думаю бд цены надо поменять на int, чтобы не округлять -->
+            <p class="card-text">{{ product.price|int }}</p>
             <a href="#" class="btn btn-primary">В корзину</a>
         </div>
     </div>
