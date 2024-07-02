@@ -7,14 +7,6 @@ import random
 @app.route("/", methods=['GET'])
 def home_page():
     page_title = "Интернет магазин" 
-    main_img = 'https://sun9-67.userapi.com/c844721/v844721600/12813f/IOTsEqFrmZY.jpg'
-    #текст под картинкой
-    text1 = 'Выберете интересующий вас раздел' 
-    #кнопки c гендерами
-    button1 = 'Мужское'
-    button2 = 'Женское'
-    button3 = 'Детское'
-    #под кнопками будут отображаться рандомные карточки товаров
     tshirts = Tshirt.query.add_columns(Tshirt.picture, Tshirt.type_item, Tshirt.price).all()
     sweatwears = Sweatwear.query.add_columns(Sweatwear.picture, Sweatwear.type_item, Sweatwear.price).all()
     outwears = Outwear.query.add_columns(Outwear.picture, Outwear.type_item, Outwear.price).all()
@@ -28,9 +20,7 @@ def home_page():
     random.shuffle(products)
     products = products[:4]
     
-    return render_template("home_page.html", page_title=page_title, text1=text1,
-                       main_img=main_img, button1=button1,
-                       button2=button2, button3=button3, products=products)
+    return render_template("home_page.html", page_title=page_title, products=products)
 
 @app.route("/login")
 def login():
