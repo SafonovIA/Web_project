@@ -1,6 +1,6 @@
 from getpass import getpass
 import sys
-from user.model import User_account
+from users.model import User_account
 from config import db, app
 
 
