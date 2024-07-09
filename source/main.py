@@ -7,7 +7,6 @@ from admin.views import blueprint as admin_blueprint
 from users.views import blueprint as user_blueprint
 from home_page.views import blueprint as home_page_blueprint
 
-
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'user.login'

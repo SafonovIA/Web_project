@@ -37,6 +37,7 @@ def home_page():
     return render_template("home_page.html", products=products)
 
 
+"""
 # кнопки на главной странице с гендерным фильтром
 @blueprint.route("/<gender>", methods=['GET'])
 def catalog_gender(gender):
@@ -67,3 +68,4 @@ def catalog_gender(gender):
 
     elif gender == 'womans':
         pass
+"""
