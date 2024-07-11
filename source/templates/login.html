@@ -16,6 +16,9 @@
                         {% endif %}
                     {% endwith %}
                     {{ form.hidden_tag() }}
+
+                    {{ form.csrf_token }}
+                    
                     <div class="form-group">
                         {{ form.username.label }}<br>
                         {{ form.username() }}<br>
