@@ -23,3 +23,32 @@ class User_account(db.Model, UserMixin):
     @property
     def is_admin(self):
         return self.role == 'admin'
+
+
+class User(db.Model):
+    __tablename__ = "users"
+    id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String(50), nullable=False)
+    second_name = db.Column(db.String(50), nullable=False)
+    phone_number = db.Column(db.BigInteger)
+    city = db.Column(db.Text, nullable=False)
+    created_at = db.Column(
+        db.DateTime, nullable=False, server_default=db.func.now()
+        )
+    deleted_at = db.Column(db.DateTime)
+
+    def __repr__(self):
+        return f"User id: {self.id}, second_name: {self.second_name}"
+
+
+class User_adress(db.Model):
+    __tablename__ = "users_adress"
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    adress = db.Column(db.Text, nullable=False)
+    city = db.Column(db.Text, nullable=False)
+    postal_code = db.Column(db.String(6), nullable=False)
+    country = db.Column(db.String(26), nullable=False)
+
+    def __repr__(self):
+        return f"User_adress: {self.id}, adress: {self.adress}"
