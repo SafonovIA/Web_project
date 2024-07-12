@@ -1,0 +1,109 @@
+{% extends 'main.html' %}
+{% block content %}
+<section class="py-5">
+    <div class="container">
+      <div class="row gx-5">
+        <aside class="col-lg-6">
+          <div class="border rounded-4 mb-3 d-flex justify-content-center">
+            <a data-fslightbox="mygallery" class="rounded-4" target="_blank" data-type="image" href="{{ product.picture }}">
+              <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit" src="{{ product.picture }}" alt="Product Image">
+            </a>
+          </div>
+        </aside>
+        <main class="col-lg-6">
+          <div class="ps-lg-3">
+            <h2 class="title text-dark">
+              {{ product.brand}} <br />
+            </h2>
+            <h4>
+            {{ product.type_item}}
+            </h4>
+
+            <div class="d-flex flex-row my-3">
+              <div class="text-warning mb-1 me-2">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+                <span class="ms-1">
+                  4.5
+                </span>
+              </div>
+              <span class="text-success ms-2">
+                {% if product.amount > 0 %}
+              <span class="text-success">В наличии</span>
+                {% else %}
+              <span class="text-danger">Нет в наличии</span>
+                {% endif %}
+              </span>
+            </div>
+
+            <div class="mb-3">
+              <span class="h5">{{ product.price | int }} рублей</span>
+            </div>
+
+            <p>
+              {{ product.description }}
+            </p>
+
+            <div class="row">
+              <dt class="col-3">Гендер:</dt>
+              <dd class="col-9"> {{ product.gender }}</dd>
+
+              <dt class="col-3"> id товара</dt>
+              <dd class="col-9">{{ product.id }}</dd>
+
+              <dt class="col-3">Материал</dt>
+              <dd class="col-9">{{ product.material }}</dd>
+            </div>
+
+            <hr />
+
+            <div class="row mb-4">
+              <div class="col-md-4 col-6">
+                <label class="mb-2">Размер</label>
+                <select class="form-select border border-secondary" style="height: 35px;">
+                  <option>{{ product.size }}</option>
+                  <option>{{ product.size }}</option>
+                  <option>{{ product.size }}</option>
+                </select>
+              </div>
+              <!-- col.// -->
+              <div class="col-md-4 col-6 mb-3">
+                <label class="mb-2 d-block">Количество</label>
+                <div class="input-group mb-3" style="width: 170px;">
+                  <button class="btn btn-white border border-secondary px-3" type="button" id="button-addon1" data-mdb-ripple-color="dark">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <input type="text" class="form-control text-center border border-secondary" placeholder="0" aria-label="Example text with button addon" aria-describedby="button-addon1" />
+                  <button class="btn btn-white border border-secondary px-3" type="button" id="button-addon2" data-mdb-ripple-color="dark">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <span class="h5">
+                  {% if product.discount %}
+                      {{ (product.price * (1 - product.discount / 100)) | int }} рублей (скидка {{ product.discount }}%)
+                  {% else %}
+                      {{ product.price | int }} рублей
+                  {% endif %}
+              </span>
+          </div>
+          <form action="{{ url_for('home_page.add_to_cart') }}" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+
+            <input type="hidden" name="product_id" value="{{ product.id }}">
+            <input type="hidden" name="product_type" value="{{ product.type_item }}">
+
+            <button type="submit" name="add" class="btn btn-success">Добавить в корзину</button>
+        </form>
+          </div>
+        </main>
+      </div>
+    </div>
+  </section>
+
+{% endblock content %}

@@ -5,6 +5,7 @@ from flask_login import LoginManager
 from admin.views import blueprint as admin_blueprint
 from users.views import blueprint as user_blueprint
 from home_page.views import blueprint as home_page_blueprint
+from product_card.views import blueprint as product_page_blueprint
 
 from flask_wtf.csrf import CSRFProtect
 
@@ -15,6 +16,7 @@ app.register_blueprint(user_blueprint)
 app.register_blueprint(admin_blueprint)
 app.register_blueprint(home_page_blueprint)
 csrf = CSRFProtect(app)
+app.register_blueprint(product_page_blueprint)
 
 
 @login_manager.user_loader

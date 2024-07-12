@@ -1,18 +1,19 @@
 <link rel="stylesheet" href="/static/styles.css">
 <div class="col-3">
     <div class="card">
-        <img src="{{ product.picture }}" class="card-img-top product-image" alt="Изображение товара">
+        <a href="{{ product.type_item }}/{{ product.id }}">
+            <img src="{{ product.picture }}" class="card-img-top product-image" alt="Изображение товара">
         <div class="card-body">
-            <h5 class="card-title">{{ product.type_item }}</h5>
-            <!-- думаю бд цены надо поменять на int, чтобы не округлять -->
-            <p class="card-text">{{ product.price|int }} ₽</p>
+                <h5 class="card-title">{{ product.type_item }}</h5>
+            </a>
+            <p class="card-text">{{ product.price|int }}</p>
             <form action="{{ url_for('home_page.add_to_cart') }}" method="post">
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
 
                 <input type="hidden" name="product_id" value="{{ product.id }}">
                 <input type="hidden" name="product_type" value="{{ product.type_item }}">
 
-                <button type="submit" name="add" class="btn btn-success">Add to Cart</button>
+                <button type="submit" name="add" class="btn btn-success">Добавить в корзину</button>
             </form>
         </div>
     </div>
