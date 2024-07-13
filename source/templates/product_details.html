@@ -18,7 +18,7 @@
             <h4>
             {{ product.type_item}}
             </h4>
-          
+
             <div class="d-flex flex-row my-3">
               <div class="text-warning mb-1 me-2">
                 <i class="fa fa-star"></i>
@@ -38,28 +38,28 @@
                 {% endif %}
               </span>
             </div>
-  
+
             <div class="mb-3">
               <span class="h5">{{ product.price | int }} рублей</span>
             </div>
-  
+
             <p>
               {{ product.description }}
             </p>
-  
+
             <div class="row">
               <dt class="col-3">Гендер:</dt>
               <dd class="col-9"> {{ product.gender }}</dd>
-  
+
               <dt class="col-3"> id товара</dt>
               <dd class="col-9">{{ product.id }}</dd>
-  
+
               <dt class="col-3">Материал</dt>
               <dd class="col-9">{{ product.material }}</dd>
             </div>
-  
+
             <hr />
-  
+
             <div class="row mb-4">
               <div class="col-md-4 col-6">
                 <label class="mb-2">Размер</label>
@@ -92,11 +92,18 @@
                   {% endif %}
               </span>
           </div>
-            <a href="#" class="btn btn-primary shadow-0"> <i class="me-1 fa fa-shopping-basket"></i> Добавить в корзину </a>
+          <form action="{{ url_for('home_page.add_to_cart') }}" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+
+            <input type="hidden" name="product_id" value="{{ product.id }}">
+            <input type="hidden" name="product_type" value="{{ product.type_item }}">
+
+            <button type="submit" name="add" class="btn btn-success">Добавить в корзину</button>
+        </form>
           </div>
         </main>
       </div>
     </div>
   </section>
-  
+
 {% endblock content %}

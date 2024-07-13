@@ -1,0 +1,31 @@
+from config import db
+
+
+class Order(db.Model):
+    __tablename__ = "orders"
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    price = db.Column(db.Float, nullable=False)
+    amount = db.Column(db.Integer, nullable=False)
+    created_at = db.Column(
+        db.DateTime, nullable=False, server_default=db.func.now()
+        )
+    modified_at = db.Column(db.DateTime)
+    deleted_at = db.Column(db.DateTime)
+
+    t_shirts = db.relationship("Tshirt", backref="order_tshirts", lazy=True)
+    sweatwear = db.relationship(
+        "Sweatwear", backref="order_sweatwer", lazy=True
+        )
+    outwear = db.relationship("Outwear", backref="order_outwear", lazy=True)
+    shoes = db.relationship("Shoes", backref="order_shoes", lazy=True)
+    trousers = db.relationship("Trousers", backref="order_trousers", lazy=True)
+    accessory = db.relationship(
+        "Accessories", backref="order_accessory", lazy=True
+        )
+    socks = db.relationship("Socks", backref="order_socks", lazy=True)
+
+    user = db.relationship('User', backref='orders')
+
+    def __repr__(self):
+        return f"Order: {Order.id}, created: {self.created_at}"
