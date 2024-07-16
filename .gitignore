@@ -1,8 +1,8 @@
 __pycache__/
 env/
 .vscode/
-config.py
 *db
 source/lib/database/*
 !source/lib/database/models.py
 config.py
+.DS_Store

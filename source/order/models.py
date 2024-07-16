@@ -13,9 +13,9 @@ class Order(db.Model):
     modified_at = db.Column(db.DateTime)
     deleted_at = db.Column(db.DateTime)
 
-    t_shirts = db.relationship("Tshirt", backref="order_tshirts", lazy=True)
+    t_shirts = db.relationship("Tshirt", backref="order_tshirt", lazy=True)
     sweatwear = db.relationship(
-        "Sweatwear", backref="order_sweatwer", lazy=True
+        "Sweatwear", backref="order_sweatwear", lazy=True
         )
     outwear = db.relationship("Outwear", backref="order_outwear", lazy=True)
     shoes = db.relationship("Shoes", backref="order_shoes", lazy=True)

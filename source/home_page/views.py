@@ -1,5 +1,6 @@
 from home_page.models import (
     Tshirt, Outwear, Sweatwear, Socks, Shoes, Trousers,
+    Accessories
     )
 from flask import render_template, Blueprint, request, redirect
 from sqlalchemy import select
@@ -11,7 +12,8 @@ blueprint = Blueprint("home_page", __name__)
 
 @blueprint.route("/", methods=['GET'])
 def home_page():
-    models = [Tshirt, Sweatwear, Outwear, Socks, Shoes, Trousers]
+    models = [Tshirt, Sweatwear, Outwear, Socks, Shoes,
+              Accessories, Trousers]
     products = []
     for model in models:
         query = model.query.add_columns(
@@ -29,7 +31,8 @@ def home_page():
 # кнопки на главной странице с гендерным фильтром
 @blueprint.route("/<gender>", methods=['GET'])
 def catalog_gender(gender):
-    models = [Tshirt, Sweatwear, Outwear, Socks, Shoes, Trousers]
+    models = [Tshirt, Sweatwear, Outwear, Socks, Shoes,
+              Trousers, Accessories]
     products = []
     gender_mapping = {
         'mans': 'мужской',
