@@ -2,6 +2,7 @@ from home_page.models import (
     Tshirt, Outwear, Sweatwear, Socks, Shoes, Trousers,
     Accessories)
 from flask import render_template, Blueprint
+from lib.database.models import Review
 
 blueprint = Blueprint("product_page", __name__)
 
@@ -18,10 +19,13 @@ def product_details(product_type, product_id):
         'Футболка': Tshirt,
         'Куртка': Outwear,
         'Кофта': Sweatwear,
-        'Аксессуары': Socks,
+        'Аксессуары': Accessories,
         'Обувь': Shoes,
-        'Штаны': Trousers
+        'Штаны': Trousers,
+        'Носки': Socks
     }
     model = models.get(product_type)
     product = model.query.get(product_id)
-    return render_template('product_details.html', product=product)
+    rating = Review.query.filter_by(id=product_id).first()
+    return render_template('product_details.html', product=product,
+                           rating=rating)

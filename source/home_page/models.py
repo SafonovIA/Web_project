@@ -27,7 +27,7 @@ class Tshirt(db.Model):
     modified_at = db.Column(db.DateTime)
     deleted_at = db.Column(db.DateTime)
 
-    order_id = db.Column(db.Integer, db.ForeignKey("orders.id"))
+    order_id = db.Column(db.Integer, db.ForeignKey("orders.id"), nullable=True)
 
     def __repr__(self):
         return f"Tshirt: {self.id}, created: {self.created_at}"
@@ -53,7 +53,7 @@ class Sweatwear(db.Model):
     modified_at = db.Column(db.DateTime)
     deleted_at = db.Column(db.DateTime)
 
-    order_id = db.Column(db.Integer, db.ForeignKey("orders.id"))
+    order_id = db.Column(db.Integer, db.ForeignKey("orders.id"), nullable=True)
 
     def __repr__(self):
         return f"Sweatwear: {self.id}, created: {self.created_at}"
@@ -79,7 +79,7 @@ class Outwear(db.Model):
     modified_at = db.Column(db.DateTime)
     deleted_at = db.Column(db.DateTime)
 
-    order_id = db.Column(db.Integer, db.ForeignKey("orders.id"))
+    order_id = db.Column(db.Integer, db.ForeignKey("orders.id"), nullable=True)
 
     def __repr__(self):
         return f"Outwear: {self.id}, created: {self.created_at}"
@@ -105,7 +105,7 @@ class Shoes(db.Model):
     modified_at = db.Column(db.DateTime)
     deleted_at = db.Column(db.DateTime)
 
-    order_id = db.Column(db.Integer, db.ForeignKey("orders.id"))
+    order_id = db.Column(db.Integer, db.ForeignKey("orders.id"), nullable=True)
 
     def __repr__(self):
         return f"Shoes: {self.id}, created: {self.created_at}"
@@ -131,7 +131,7 @@ class Trousers(db.Model):
     modified_at = db.Column(db.DateTime)
     deleted_at = db.Column(db.DateTime)
 
-    order_id = db.Column(db.Integer, db.ForeignKey("orders.id"))
+    order_id = db.Column(db.Integer, db.ForeignKey("orders.id"), nullable=True)
 
     def __repr__(self):
         return f"Trousers: {self.id}, created: {self.created_at}"
@@ -157,7 +157,7 @@ class Accessories(db.Model):
     modified_at = db.Column(db.DateTime)
     deleted_at = db.Column(db.DateTime)
 
-    order_id = db.Column(db.Integer, db.ForeignKey("orders.id"))
+    order_id = db.Column(db.Integer, db.ForeignKey("orders.id"), nullable=True)
 
     def __repr__(self):
         return f"Accessory: {self.id}, created: {self.created_at}"
@@ -183,7 +183,7 @@ class Socks(db.Model):
     modified_at = db.Column(db.DateTime)
     deleted_at = db.Column(db.DateTime)
 
-    order_id = db.Column(db.Integer, db.ForeignKey("orders.id"))
+    order_id = db.Column(db.Integer, db.ForeignKey("orders.id"), nullable=True)
 
     def __repr__(self):
         return f"Socks: {self.id}, created: {self.created_at}"
