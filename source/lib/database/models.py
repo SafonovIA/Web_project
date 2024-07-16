@@ -20,7 +20,7 @@ class Review(db.Model):
     outwear = db.relationship("Outwear", backref="review_outwear", lazy=True)
     shoes = db.relationship("Shoes", backref="review_shoes", lazy=True)
     trousers = db.relationship(
-        "Trousers", backref="review_trouesers", lazy=True
+        "Trousers", backref="review_trousers", lazy=True
         )
     accessory = db.relationship(
         "Accessories", backref="review_accessory", lazy=True
