@@ -8,12 +8,18 @@ from flask_wtf.csrf import CSRFProtect
 from flask_migrate import Migrate
 from order.views import blueprint as order_blueprint
 
-from home_page.models import (  # noqa: F401
-    Tshirt, Outwear, Sweatwear, Socks, Shoes, Trousers, Accessories
+from home_page.models import (
+    Tshirt,
+    Outwear,
+    Sweatwear,
+    Socks,
+    Shoes,
+    Trousers,
+    Accessories
     )
-from order.models import Order  # noqa: F401
-from users.model import User_account, User, User_address  # noqa: F401
-from lib.database.models import Review, Purchase_return  # noqa: F401
+from order.models import Order
+from users.model import User_account, User, User_address
+from lib.database.models import Review, Purchase_return
 
 
 migrate = Migrate(app, db)

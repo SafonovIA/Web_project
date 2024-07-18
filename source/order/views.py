@@ -2,7 +2,12 @@ from flask import render_template, Blueprint, request, redirect
 
 from config import db
 from home_page.models import (
-    Socks, Trousers, Shoes, Outwear, Sweatwear, Tshirt, Accessories
+    Socks,
+    Trousers,
+    Shoes,
+    Outwear,
+    Sweatwear,
+    Tshirt
     )
 from flask_login import current_user, login_required
 from order.models import Order
@@ -95,7 +100,7 @@ def get_type_item():
         "Куртка": Outwear,
         "Обувь": Shoes,
         "Штаны": Trousers,
-        "Аксессуары": Accessories,
+        "Аксессуары": Socks,
         "Носки": Socks
     }
 
@@ -114,13 +119,13 @@ def add_in_order(type_item, item):
         elif type_item == "Штаны":
             active_order.trousers.append(item)
         elif type_item == "Аксессуары":
-            active_order.accessory.append(item)
+            active_order.socks.append(item)
         elif type_item == "Носки":
             active_order.socks.append(item)
-        if item:
-            active_order.amount += 1
-            active_order.price += item.price
-            db.session.commit()
+    if item:
+        active_order.amount += 1
+        active_order.price += item.price
+        db.session.commit()
 
 
 def remove_item_in_order(type_item, item):
@@ -137,7 +142,7 @@ def remove_item_in_order(type_item, item):
         elif type_item == "Штаны":
             active_order.trousers.remove(item)
         elif type_item == "Аксессуары":
-            active_order.accessory.remove(item)
+            active_order.socks.remove(item)
         elif type_item == "Носки":
             active_order.socks.remove(item)
         active_order.amount -= 1
