@@ -1,5 +1,3 @@
-from users.model import User_account
-
 from config import app, db
 from flask_login import LoginManager
 from admin.views import blueprint as admin_blueprint
@@ -8,15 +6,20 @@ from home_page.views import blueprint as home_page_blueprint
 from product_card.views import blueprint as product_page_blueprint
 from flask_wtf.csrf import CSRFProtect
 from flask_migrate import Migrate
+from order.views import blueprint as order_blueprint
 
 from home_page.models import (
-    Tshirt, Outwear, Sweatwear, Socks, Shoes, Trousers,
-    Accessories)
-from order.models import (Order)  # noqa: F401
-from users.model import ( 
-    User_account, User, User_address)
-from lib.database.models import (
-    Review, Purchase_return)
+    Tshirt,
+    Outwear,
+    Sweatwear,
+    Socks,
+    Shoes,
+    Trousers,
+    Accessories
+    )
+from order.models import Order
+from users.model import User_account, User, User_address
+from lib.database.models import Review, Purchase_return
 
 
 migrate = Migrate(app, db)
@@ -28,8 +31,10 @@ login_manager.login_view = 'user.login'
 app.register_blueprint(user_blueprint)
 app.register_blueprint(admin_blueprint)
 app.register_blueprint(home_page_blueprint)
-csrf = CSRFProtect(app)
 app.register_blueprint(product_page_blueprint)
+app.register_blueprint(order_blueprint)
+
+csrf = CSRFProtect(app)
 
 
 @login_manager.user_loader

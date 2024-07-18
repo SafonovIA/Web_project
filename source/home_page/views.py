@@ -1,5 +1,10 @@
 from home_page.models import (
-    Tshirt, Outwear, Sweatwear, Socks, Shoes, Trousers,
+    Tshirt,
+    Outwear,
+    Sweatwear,
+    Socks,
+    Shoes,
+    Trousers,
     Accessories
     )
 from flask import render_template, Blueprint, request, redirect
