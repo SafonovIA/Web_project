@@ -7,7 +7,7 @@
                 <h5 class="card-title">{{ product.type_item }}</h5>
             </a>
             <p class="card-text">{{ product.price|int }}</p>
-            <form action="{{ url_for('home_page.add_to_cart') }}" method="post">
+            <form action="{{ url_for('order.add_to_cart') }}" method="post">
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
 
                 <input type="hidden" name="product_id" value="{{ product.id }}">

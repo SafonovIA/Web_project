@@ -1,38 +1,50 @@
 {% extends 'main.html' %}
 {% block content %}
     <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                {% for product in items %}
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="{{ product.picture }}" class="card-img-top product-image" alt="Изображение товара">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.type_item }}</h5>
+                            <p class="card-text">{{ product.price|int }} ₽</p>
+                            <form action="{{ url_for('order.delete') }}" method="post">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
 
-    {% for product in items %}
-    <div class="card mb-3" style="max-width: 540px;">
-        <div class="row g-0">
-        <div class="col-md-4">
-            <img src="{{ product.picture }}" class="card-img-top product-image" alt="Изображение товара">
-        </div>
-        <div class="col-md-8">
-            <div class="card-body">
-                <h5 class="card-title">{{ product.type_item }}</h5>
-                <p class="card-text">{{ product.price|int }} ₽</p>
-                <form action="{{ url_for('home_page.delete') }}" method="post">
-                    <input type="hidden" name="dell" value="{{ product }}">
+                                <input type="hidden" name="product_id" value="{{ product.id }}">
+                                <input type="hidden" name="product_type" value="{{ product.type_item }}">
+
+                                <button type="submit" name="dell" class="btn btn-danger">Удалить из корзины</button>
+                            </form>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="col-4" align="center">
+                <form action="{{ url_for('order.checkout') }}" method="post">
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-                    <button type="submit" name="add" class="btn btn-danger">Удалить из корзины</button>
+
+                    <button type="submit" name="dell" class="btn btn-success">Оформить заказ</button>
                 </form>
+                <br>
+                <br>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Колличество товаров: {{ amount }} шт.</li>
+                    <li class="list-group-item">Общая сумма заказа: {{ price|int }} ₽</li>
+                </ul>
             </div>
         </div>
-        </div>
     </div>
-    {% endfor %}
 
-
-    <div class="col-4" align="center">
-        <button type="button" class="btn btn-success">Перейти к оформлению</button>
-        <br>
-        <br>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">Колличество товаров: ___</li>
-            <li class="list-group-item">Общая сумма заказа: ___</li>
-        </ul>
-    </div>
 
         <br>
         <br>
