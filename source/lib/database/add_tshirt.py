@@ -37,10 +37,10 @@ def generate_fake_users(count=20):
 def generate_fake_users_adress(count=20):
     try:
         users = User.query.all()
-        
+
         for _ in range(count):
             user = random.choice(users)
-            
+
             user_address = User_address(
                 user_id=user.id,
                 address = faker.address(),
@@ -48,7 +48,7 @@ def generate_fake_users_adress(count=20):
                 postal_code = faker.postcode(),
                 country = faker.country()
             )
-        
+
 
             db.session.add(user_address)
 
@@ -73,12 +73,12 @@ def generate_fake_reviews(count=100):
                 modified_at=None,
                 deleted_at=None
             )
-            
+
             random_product_type = random.choice([
-                't_shirts', 'sweatwears', 'outwears', 
+                't_shirts', 'sweatwears', 'outwears',
                 'shoes', 'trousers', 'socks', 'accessories'
             ])
-            
+
             product = None
 
             if random_product_type == 't_shirts':
@@ -104,15 +104,15 @@ def generate_fake_reviews(count=100):
             elif random_product_type == 'accessories':
                 product = Accessories.query.order_by(func.random()).first()
                 if product:
-                    review.accessory.append(product) 
+                    review.accessory.append(product)
             elif random_product_type == 'socks':
                 product = Socks.query.order_by(func.random()).first()
                 if product:
                     review.socks.append(product)
-            
+
             if product:
                 db.session.add(review)
-        
+
         db.session.commit()
 
     except Exception as e:
@@ -150,7 +150,7 @@ def generate_fake_tshirt(count=20):
 
     finally:
         db.session.close()
-        
+
 def generate_fake_sweatwear(count=20):
     try:
         for _ in range(count):
@@ -179,7 +179,7 @@ def generate_fake_sweatwear(count=20):
 
     finally:
         db.session.close()
-        
+
 def generate_fake_outwear(count=20):
     try:
         for _ in range(count):
@@ -208,7 +208,7 @@ def generate_fake_outwear(count=20):
 
     finally:
         db.session.close()
-    
+
 def generate_fake_shoes(count=20):
     try:
         for _ in range(count):
@@ -237,7 +237,7 @@ def generate_fake_shoes(count=20):
 
     finally:
         db.session.close()
-        
+
 def generate_fake_trousers(count=20):
     try:
         for _ in range(count):
@@ -269,7 +269,7 @@ def generate_fake_trousers(count=20):
 
     finally:
         db.session.close()
-        
+
 def generate_fake_accessories(count=20):
     try:
         for _ in range(count):
@@ -298,7 +298,7 @@ def generate_fake_accessories(count=20):
 
     finally:
         db.session.close()
-       
+
 def generate_fake_socks(count=20):
     try:
         for _ in range(count):
@@ -330,16 +330,16 @@ def generate_fake_socks(count=20):
 
 
 def generate_fake_data():
-        # generate_fake_users()
-        # generate_fake_users_adress()
-        # generate_fake_reviews()
-        # generate_fake_tshirt()
-        # generate_fake_sweatwear()
-        # generate_fake_outwear()
-        # generate_fake_shoes()
-        # generate_fake_trousers()
-        # generate_fake_accessories()
-        # generate_fake_socks()
+        generate_fake_users()
+        generate_fake_users_adress()
+        generate_fake_reviews()
+        generate_fake_tshirt()
+        generate_fake_sweatwear()
+        generate_fake_outwear()
+        generate_fake_shoes()
+        generate_fake_trousers()
+        generate_fake_accessories()
+        generate_fake_socks()
 
 
 if __name__ == '__main__':

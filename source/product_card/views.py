@@ -19,15 +19,13 @@ def product_details(product_type, product_id):
         'Футболка': Tshirt,
         'Куртка': Outwear,
         'Кофта': Sweatwear,
-        'Аксессуары': Socks,
+        'Аксессуары': Accessories,
         'Обувь': Shoes,
         'Штаны': Trousers,
         'Носки': Socks
     }
     model = models.get(product_type)
-    print("___________________________", model.query.get(product_id))
     product = model.query.get(product_id)
     rating = Review.query.filter_by(id=product_id).first()
-
     return render_template('product_details.html', product=product,
                            rating=rating)

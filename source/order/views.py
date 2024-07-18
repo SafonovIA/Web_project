@@ -7,7 +7,8 @@ from home_page.models import (
     Shoes,
     Outwear,
     Sweatwear,
-    Tshirt
+    Tshirt,
+    Accessories
     )
 from flask_login import current_user, login_required
 from order.models import Order
@@ -100,7 +101,7 @@ def get_type_item():
         "Куртка": Outwear,
         "Обувь": Shoes,
         "Штаны": Trousers,
-        "Аксессуары": Socks,
+        "Аксессуары": Accessories,
         "Носки": Socks
     }
 
@@ -119,13 +120,13 @@ def add_in_order(type_item, item):
         elif type_item == "Штаны":
             active_order.trousers.append(item)
         elif type_item == "Аксессуары":
-            active_order.socks.append(item)
+            active_order.accessory.append(item)
         elif type_item == "Носки":
             active_order.socks.append(item)
-    if item:
-        active_order.amount += 1
-        active_order.price += item.price
-        db.session.commit()
+        if item:
+            active_order.amount += 1
+            active_order.price += item.price
+            db.session.commit()
 
 
 def remove_item_in_order(type_item, item):
@@ -142,7 +143,7 @@ def remove_item_in_order(type_item, item):
         elif type_item == "Штаны":
             active_order.trousers.remove(item)
         elif type_item == "Аксессуары":
-            active_order.socks.remove(item)
+            active_order.accessory.remove(item)
         elif type_item == "Носки":
             active_order.socks.remove(item)
         active_order.amount -= 1
