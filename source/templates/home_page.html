@@ -1,19 +1,14 @@
 {% extends 'main.html' %}
 {% block content %}
-  <div class="row">
-    <div class="card mb-3">
-
-        <img src='https://sun9-67.userapi.com/c844721/v844721600/12813f/IOTsEqFrmZY.jpg' class="card-img-top" alt="Горы">
-        <div class="card-body">
-          <h5 class="card-title text-center">Выберете интересующий вас раздел</h5>
-          <div class="text-center">
-            <a class="btn btn-primary" href="/mans" role="button">Мужское</a>
-            <a class="btn btn-primary" href="/womans" role="button">Женское</a>
-            <a class="btn btn-primary" href="/kids" role="button">Детское</a>
-          </div>
+    <div class="col-12">
+        <div class="card text-bg-dark">
+            <img src='https://sun9-67.userapi.com/c844721/v844721600/12813f/IOTsEqFrmZY.jpg' class="card-img-top" alt="Горы">
+            <div class="card-img-overlay">
+                <p align="center"><font size="8" color="#000" >Скидки и предложения</font></p>
+            </div>
         </div>
     </div>
-  </div>
+    <br>
 
   <div class="row">
     {% for product in products %}

@@ -74,8 +74,9 @@ def delete():
 @blueprint.route("/checkout", methods=['POST'])
 @login_required
 def checkout():
-    get_order().status = "inactive"
-    db.session.commit()
+    if get_order() and all_order_items():
+        get_order().status = "inactive"
+        db.session.commit()
     return redirect("/order/basket")
 
 
@@ -116,9 +117,10 @@ def add_in_order(type_item, item):
             active_order.accessory.append(item)
         elif type_item == "Носки":
             active_order.socks.append(item)
-        active_order.amount += 1
-        active_order.price += item.price
-        db.session.commit()
+        if item:
+            active_order.amount += 1
+            active_order.price += item.price
+            db.session.commit()
 
 
 def remove_item_in_order(type_item, item):
