@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, flash, redirect, url_for
-from users.model import User_account
+from users.model import User
 from users.forms import LoginForm, RegistrationForm
 from flask_login import login_user, logout_user, current_user, login_required
 from config import db
@@ -20,7 +20,7 @@ def login():
 def process_login():
     form = LoginForm()
     if form.validate_on_submit():
-        user = User_account.query.filter_by(
+        user = User.query.filter_by(
             username=form.username.data
             ).first()
         if user and user.check_password(form.password.data):
@@ -56,8 +56,11 @@ def register():
 def process_reg():
     form = RegistrationForm()
     if form.validate_on_submit():
-        new_user = User_account(username=form.username.data,
-                                email=form.email.data, role='user')
+        new_user = User(
+            username=form.username.data,
+            email=form.email.data,
+            role='user'
+            )
         new_user.set_password(form.password.data)
         db.session.add(new_user)
         db.session.commit()
@@ -71,4 +74,3 @@ def process_reg():
                         - {error}'
                       )
         return redirect(url_for('user.register'))
-

@@ -3,13 +3,25 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from config import db
 
 
-class User_account(db.Model, UserMixin):
+class User(db.Model, UserMixin):
+    __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(50), index=True, unique=True,
-                         nullable=False)
+    username = db.Column(
+        db.String(50),
+        index=True,
+        unique=True,
+        nullable=False
+        )
     email = db.Column(db.String(50), index=True, unique=True, nullable=False)
     password = db.Column(db.String, nullable=False)
     role = db.Column(db.String(10), index=True)
+    first_name = db.Column(db.String(50))
+    second_name = db.Column(db.String(50))
+    phone_number = db.Column(db.BigInteger)
+    created_at = db.Column(
+        db.DateTime, nullable=False, server_default=db.func.now()
+        )
+    deleted_at = db.Column(db.DateTime)
 
     def __repr__(self) -> str:
         return f"User {self.user_name}, id {self.id}"
@@ -23,21 +35,6 @@ class User_account(db.Model, UserMixin):
     @property
     def is_admin(self):
         return self.role == 'admin'
-
-
-class User(db.Model):
-    __tablename__ = "users"
-    id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.String(50), nullable=False)
-    second_name = db.Column(db.String(50), nullable=False)
-    phone_number = db.Column(db.BigInteger)
-    created_at = db.Column(
-        db.DateTime, nullable=False, server_default=db.func.now()
-        )
-    deleted_at = db.Column(db.DateTime)
-
-    def __repr__(self):
-        return f"User id: {self.id}, second_name: {self.second_name}"
 
 
 class User_address(db.Model):
