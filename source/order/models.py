@@ -2,8 +2,8 @@ from config import db
 from sqlalchemy import Enum
 
 
-status_enum = Enum(
-    'active', "inactive", name='status_enum', schema='public'
+enum_st = Enum(
+    'active', "inactive", name='enum_st', schema='public'
     )
 
 
@@ -32,7 +32,11 @@ class Order(db.Model):
     socks = db.relationship("Socks", backref="order_socks", lazy=True)
 
     user = db.relationship('User', backref='orders')
-    status = db.Column(status_enum, nullable=False)
+    status = db.Column(
+        enum_st,
+        values_callable=['active', "inactive"],
+        nullable=False
+        )
 
     def __repr__(self):
         return f"Order: {Order.id}, created: {self.created_at}"
