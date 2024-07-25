@@ -21,6 +21,7 @@ app.register_blueprint(home_page_blueprint)
 app.register_blueprint(product_page_blueprint)
 app.register_blueprint(order_blueprint)
 
+
 csrf = CSRFProtect(app)
 
 

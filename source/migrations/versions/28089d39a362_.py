@@ -1,8 +1,8 @@
-"""address
+"""empty message
 
-Revision ID: f1c867659e39
-Revises: 778d29eae050
-Create Date: 2024-07-16 03:11:47.361236
+Revision ID: 28089d39a362
+Revises: 
+Create Date: 2024-07-22 20:19:18.674566
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql
 
 # revision identifiers, used by Alembic.
-revision = 'f1c867659e39'
-down_revision = '778d29eae050'
+revision = '28089d39a362'
+down_revision = None
 branch_labels = None
 depends_on = None
 
@@ -22,6 +22,12 @@ def upgrade():
         batch_op.alter_column('gender',
                existing_type=postgresql.ENUM('мужской', 'женский', 'детский', name='gender_enum'),
                type_=sa.Enum('мужской', 'женский', 'детский', name='gender_enum', schema='public'),
+               existing_nullable=False)
+
+    with op.batch_alter_table('orders', schema=None) as batch_op:
+        batch_op.alter_column('status',
+               existing_type=postgresql.ENUM('active', 'inactive', name='status_enum'),
+               type_=sa.Enum('active', 'inactive', name='status_enum', schema='public'),
                existing_nullable=False)
 
     with op.batch_alter_table('outwears', schema=None) as batch_op:
@@ -99,6 +105,12 @@ def downgrade():
         batch_op.alter_column('gender',
                existing_type=sa.Enum('мужской', 'женский', 'детский', name='gender_enum', schema='public'),
                type_=postgresql.ENUM('мужской', 'женский', 'детский', name='gender_enum'),
+               existing_nullable=False)
+
+    with op.batch_alter_table('orders', schema=None) as batch_op:
+        batch_op.alter_column('status',
+               existing_type=sa.Enum('active', 'inactive', name='status_enum', schema='public'),
+               type_=postgresql.ENUM('active', 'inactive', name='status_enum'),
                existing_nullable=False)
 
     with op.batch_alter_table('accessories', schema=None) as batch_op:

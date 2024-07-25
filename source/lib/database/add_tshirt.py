@@ -8,15 +8,21 @@ from home_page.models import (
 from users.model import (User, User_address)
 from lib.database.models import (Review)
 from order.models import Order
-
-
-faker = Faker('ru_RU')
-
+from werkzeug.security import generate_password_hash
+faker = Faker()
 
 def generate_fake_users(count=20):
     try:
         for _ in range(count):
+            username = faker.user_name()
+            email = faker.email()
+            password = faker.password()
+            role = random.choice(['user', 'admin'])
             user = User(
+                username=username,
+                email=email,
+                password=generate_password_hash(password),
+                role=role,
                 first_name=faker.first_name(),
                 second_name=faker.last_name(),
                 phone_number=faker.random_number(digits=9),
@@ -30,9 +36,11 @@ def generate_fake_users(count=20):
 
     except Exception as e:
         db.session.rollback()
+        print(f'{e}')
 
     finally:
         db.session.close()
+
 
 def generate_fake_users_adress(count=20):
     try:
@@ -330,16 +338,16 @@ def generate_fake_socks(count=20):
 
 
 def generate_fake_data():
-        generate_fake_users()
-        generate_fake_users_adress()
-        generate_fake_reviews()
-        generate_fake_tshirt()
-        generate_fake_sweatwear()
-        generate_fake_outwear()
-        generate_fake_shoes()
-        generate_fake_trousers()
-        generate_fake_accessories()
-        generate_fake_socks()
+        # generate_fake_users()
+        # generate_fake_users_adress()
+        generate_fake_reviews(100)
+        # generate_fake_tshirt()
+        # generate_fake_sweatwear()
+        # generate_fake_outwear()
+        # generate_fake_shoes()
+        # generate_fake_trousers()
+        # generate_fake_accessories()
+        # generate_fake_socks()
 
 
 if __name__ == '__main__':
