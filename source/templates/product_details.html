@@ -92,7 +92,7 @@
                   {% endif %}
               </span>
           </div>
-          <form action="{{ url_for('order.add_to_cart') }}" method="post">
+          <form action="{{ url_for('order.add_to_cart') }}" method="POST">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
 
             <input type="hidden" name="product_id" value="{{ product.id }}">
@@ -127,6 +127,7 @@
             </div>
             <div class="row">
               <div class="col-12">
+                {% if current_user.is_authenticated %}
                 <form method="post" action="">
                   {{ form.hidden_tag() }}
                   <div class="comment-box border p-4 rounded">
@@ -141,6 +142,7 @@
                     </div>
                     <div class="d-flex justify-content-end">
                       {{ form.submit(class="btn btn-success btn-sm") }}
+                  {% endif %}
                     </div>
                   </div>
                 </form>

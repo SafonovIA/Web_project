@@ -56,7 +56,10 @@ def product_details(product_type, product_id):
                                     product_type=product_type,
                                     product_id=product_id))
         else:
-            return redirect(url_for('auth.login'))
+            flash('Войдите в систему, чтобы оставить отзыв.')
+            return redirect(url_for('product_page.product_details',
+                                    product_type=product_type,
+                                    product_id=product_id))
 
     return render_template('product_details.html', product=product,
                            rating=rating, reviews=review_list, form=form)
