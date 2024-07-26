@@ -32,11 +32,7 @@ class Order(db.Model):
     socks = db.relationship("Socks", backref="order_socks", lazy=True)
 
     user = db.relationship('User', backref='orders')
-    status = db.Column(
-        enum_st,
-        values_callable=['active', "inactive"],
-        nullable=False
-        )
+    status = db.Column(enum_st, nullable=False)
 
     def __repr__(self):
         return f"Order: {Order.id}, created: {self.created_at}"

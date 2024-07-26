@@ -24,7 +24,7 @@
 
                 <span class="ms-1">
                   {% if rating %}
-                      {{ rating.rating | int }}
+                      {{ rating }}
                   {% else %}
                       Без рейтинга
                   {% endif %}
@@ -70,7 +70,6 @@
                   <option>{{ product.size }}</option>
                 </select>
               </div>
-              <!-- col.// -->
               <div class="col-md-4 col-6 mb-3">
                 <label class="mb-2 d-block">Количество</label>
                 <div class="input-group mb-3" style="width: 170px;">
@@ -93,7 +92,7 @@
                   {% endif %}
               </span>
           </div>
-          <form action="{{ url_for('order.add_to_cart') }}" method="post">
+          <form action="{{ url_for('order.add_to_cart') }}" method="POST">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
 
             <input type="hidden" name="product_id" value="{{ product.id }}">
@@ -102,9 +101,54 @@
             <button type="submit" name="add" class="btn btn-success">Добавить в корзину</button>
         </form>
           </div>
-        </main>
-      </div>
-    </div>
-  </section>
-
+          <section class="container mt-4">
+            <div class="row mb-4">
+              <div class="col-20">
+                <h4>Отзывы</h4>
+                <div class="comment-widgets">
+                  {% if reviews %}
+                    {% for review in reviews %}
+                      {% if review is not none and review.user %}
+                        <div class="border p-3 mb-3 rounded">
+                          <h6 class="font-medium">Пользователь: {{ review.user.username }}</h6>
+                          <span class="d-block col-md-8">Оценка: {{ review.rating }}</span>
+                          <span class="d-block mb-2">{{ review.review }}</span>
+                          <div class="comment-footer">
+                            <span class="d-block mb-2">Дата: {{ review.created_at.strftime('%B %d, %Y') }}</span>
+                          </div>
+                        </div>
+                      {% endif %}
+                    {% endfor %}
+                  {% else %}
+                    <p>Отзывов пока нет.</p>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                {% if current_user.is_authenticated %}
+                <form method="post" action="">
+                  {{ form.hidden_tag() }}
+                  <div class="comment-box border p-4 rounded">
+                    <h4>Добавить отзыв</h4>
+                    <div class="rating mb-1">
+                      {{ form.rating.label(class="form-label") }}
+                      {{ form.rating() }}
+                    </div>
+                    <h7>Текст отзыва</h7>
+                    <div class="comment-area mb-3">
+                      {{ form.review(class="form-control", placeholder="Вы можете оставить свой отзыв тут.", rows=4) }}
+                    </div>
+                    <div class="d-flex justify-content-end">
+                      {{ form.submit(class="btn btn-success btn-sm") }}
+                  {% endif %}
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </section>
+          
+          
 {% endblock content %}

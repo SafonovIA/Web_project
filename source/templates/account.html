@@ -1,5 +1,118 @@
 {% extends 'main.html' %}
 {% block content %}
-<h1>Страница аккаунта</h1>
-<a class="btn btn-danger" href="/users/logout" role="button">Выйти</a>
+
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="card h-1001">
+        <div class="card-body">
+            <form method="post">
+                {{ form.hidden_tag() }}
+                <div class="row gutters">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <h6 class="mb-2 text-primary">Персональные данные</h6>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div class="form-group">
+                            {{ form.first_name.label }}
+                            {{ form.first_name(class="form-control") }}
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div class="form-group">
+                            {{ form.email.label }}
+                            {{ form.email(class="form-control") }}
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div class="form-group">
+                            {{ form.second_name.label }}
+                            {{ form.second_name(class="form-control") }}
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div class="form-group">
+                            {{ form.phone.label }}
+                            {{ form.phone(class="form-control") }}
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div class="form-group">
+                            {{ form.username.label }}
+                            {{ form.username(class="form-control") }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row gutters">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <h6 class="mt-3 mb-2 text-primary">Пароль</h6>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                            <div class="form-group">
+                                {{ form.old_password.label }}
+                                {{ form.old_password(class="form-control") }}
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                            <div class="form-group">
+                                {{ form.new_password.label }}
+                                {{ form.new_password(class="form-control") }}
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                            <div class="form-group">
+                                {{ form.new_password2.label }}
+                                {{ form.new_password2(class="form-control") }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row gutters">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <h6 class="mt-3 mb-2 text-primary">Адрес</h6>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div class="form-group">
+                            {{ form.country.label }}
+                            {{ form.country(class="form-control") }}
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div class="form-group">
+                            {{ form.city.label }}
+                            {{ form.city(class="form-control") }}
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div class="form-group">
+                            {{ form.street.label }}
+                            {{ form.street(class="form-control") }}
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div class="form-group">
+                            {{ form.postal_code.label }}
+                            {{ form.postal_code(class="form-control") }}
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top: 10px;"></div>
+                <div class="row gutters">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="text-right">
+                            <form action="{{ url_for('user.account') }}" method="post">
+                                {{ form.hidden_tag() }}
+                                <button type="submit" name="update" class="btn btn-primary">Обновить данные</button>
+                            </form>
+                            <div style="margin-top: 8px;"></div>
+                            <form action="{{ url_for('user.logout') }}" method="post">
+                                {{ form.hidden_tag() }}
+                                <input type="hidden" name="logout_action" value="true">
+                                <button type="submit" class="btn btn-secondary">Выйти</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

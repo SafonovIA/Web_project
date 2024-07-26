@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import (
     StringField, PasswordField, SubmitField, BooleanField, ValidationError
     )
-from wtforms.validators import DataRequired, EqualTo
+from wtforms.validators import DataRequired, EqualTo, Email
 from users.model import User
 
 
@@ -64,3 +64,67 @@ class RegistrationForm(FlaskForm):
             raise ValidationError(
                 'Пользователь с такой электронной почтой уже зарегистрирован'
             )
+
+
+class UserProfileForm(FlaskForm):
+    first_name = StringField(
+        'Имя',
+        validators=[DataRequired()],
+        render_kw={"class": "form-control"}
+    )
+    email = StringField(
+        'Email',
+        validators=[DataRequired(), Email()],
+        render_kw={"class": "form-control"}
+    )
+    second_name = StringField(
+        'Фамилия',
+        validators=[DataRequired()],
+        render_kw={"class": "form-control"}
+    )
+    phone = StringField(
+        'Номер телефона',
+        validators=[DataRequired()],
+        render_kw={"class": "form-control"}
+    )
+    username = StringField(
+        'Логин',
+        validators=[DataRequired()],
+        render_kw={"class": "form-control"}
+    )
+    old_password = PasswordField(
+        'Старый пароль',
+        render_kw={"class": "form-control"}
+    )
+    new_password = PasswordField(
+        'Новый пароль',
+        render_kw={"class": "form-control"}
+    )
+    new_password2 = PasswordField(
+        'Повторите новый пароль',
+        render_kw={"class": "form-control"}
+    )
+    country = StringField(
+        'Страна',
+        validators=[DataRequired()],
+        render_kw={"class": "form-control"}
+    )
+    city = StringField(
+        'Город',
+        validators=[DataRequired()],
+        render_kw={"class": "form-control"}
+    )
+    street = StringField(
+        'Улица',
+        validators=[DataRequired()],
+        render_kw={"class": "form-control"}
+    )
+    postal_code = StringField(
+        'Почтовый индекс',
+        validators=[DataRequired()],
+        render_kw={"class": "form-control"}
+    )
+    submit = SubmitField(
+        'Обновить данные',
+        render_kw={"class": "btn btn-primary"}
+    )
